@@ -8,7 +8,7 @@ class Api::V1::WishesController < ApplicationController
   end
 
   def show
-   @wish = Wish.find(params[:id])
+   # @wish = Wish.find(params[:id])
    render json: @wish, status: 200
  end
 
@@ -31,6 +31,12 @@ class Api::V1::WishesController < ApplicationController
     else
       render json: { errors: @wish.errors.full_messages }, status: :unprocessible_entity
     end
+  end
+
+  def destroy
+    @wish = Wish.find(params[:id])
+    @wish.delete
+    render json: @wishes
   end
 
   private
