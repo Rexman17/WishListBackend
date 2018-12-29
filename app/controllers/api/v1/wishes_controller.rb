@@ -12,6 +12,18 @@ class Api::V1::WishesController < ApplicationController
    render json: @wish, status: 200
  end
 
+   def create
+    @wish = Wish.new(wish_params)
+    # byebug
+    if @wish.valid?
+      @wish.save
+      render json: @wish, status: :accepted
+    else
+      render json: { errors: @wish.errors.full_messages }, status: :unprocessible_entity
+    end
+  end
+
+
   def update
     @wish.update(wish_params)
     if @wish.save
