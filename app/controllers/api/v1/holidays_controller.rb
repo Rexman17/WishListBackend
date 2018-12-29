@@ -6,6 +6,11 @@ class Api::V1::HolidaysController < ApplicationController
     render json: @holidays
   end
 
+  def show
+   @holiday = Holiday.find(params[:id])
+   render json: @holiday, status: 200
+ end
+
   # def update
   #   @holiday.update(holiday_params)
   #   if @holiday.save
